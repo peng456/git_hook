@@ -13,7 +13,9 @@
 1、查看git 的钩子函数  
 在 .git/hooks 目录下看git 给的默认钩子函数。  
 参考blog（http://wubaoguo.com/2016/12/02/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/git%E9%92%A9%E5%AD%90%E8%AF%A6%E8%A7%A3/）
-（https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git-%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81）
+（https://github.com/geeeeeeeeek/git-recipes/wiki/5.4-Git-%E9%92%A9%E5%AD%90%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BD%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81）  
+(https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)
+（https://imweb.io/topic/5b13aa38d4c96b9b1b4c4e9d）
 applypatch-msg.sample、  
 commit-msg.sample、 
 post-update.sample、  
@@ -33,6 +35,46 @@ post-receive.sample、
 2、运维上线代码分支流程一般是：  
 先拉 开发人员分支 ===》 release 分支  ====》 然后在把 release 分支 推到master 分支。  
 所以我想的是有一个premerge hook ===》 但是git 没有。。。。这就呵呵了  
+
+方案 1、客户端 pre-push  hook 里面完成    2、服务器端的 pre-receive 完成  ；但是这需要 服务器与移动端的交互，可能有点难。（先实现第一个吧）
+
+shell 脚本:
+pre-push：：
+
+# 展示参数
+
+# 找不到需要的参数  ===》 还是得仔细读东西啊 .在pre-push 文件上面有说明。==》仔细阅读啊 ====》 This hook is called with the following parameters:  ====》  看文档，就肯能 知道 git 调用 这个 bash 的时候，会带有什么参数了。以及在bash 有哪些变量参数。
+
+
+for arg in $*
+do
+   echo "arg: $index = $arg"
+   let index+=1
+done
+
+for arg in "$@"
+do
+   echo $arg
+done
+
+我靠，不行啊  pre-push  里面只有不多几个参数 $1 、$2  local_ref、 local_sha（本地commitid）、 remote_ref 、remote_sha（远程commitid）
+
+其中 
+
+ git push  远程仓库  分支
+ 
+ 看来只能是 git merge qiskit-sdk-py-learn-note  ???   但是没有 pre-merge 呀？
+
+咋办？？？
+
+local_sha  ===》 推到出分支 ？？？
+
+
+
+
+
+chmod u+x pre-push
+
 
 
 
