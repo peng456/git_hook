@@ -93,9 +93,11 @@ https://segmentfault.com/q/1010000000464961
  
 找不到 hook 还是没能把 分支传进来。。。。。。
 
-
 chmod u+x pre-push
 
+大体思路走通了，细节待完善。。。。。。  
+example 目录
+/Users/username/lab/qiskit-sdk-py/.git/hooks
 
 
 
