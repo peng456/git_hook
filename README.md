@@ -69,8 +69,29 @@ done
 
 local_sha  ===》 推到出分支 ？？？  commitid 这个行不通。为啥git就没有把 那个分支传进来呢。。。。。真是
 
+stackoverflow上  pre-merge都没有好的解决方案。
+https://stackoverflow.com/questions/19102714/how-would-i-write-a-pre-merge-hook-in-git
+https://stackoverflow.com/questions/11532556/git-pre-merge-hook
 
+呵呵了。
 
+这些思路是对的 Yeah !!!
+https://segmentfault.com/q/1010000000464961
+
+1、
+- git branch --merged
+- git branch --no-merged  
+
+2、
+ git log | grep branch_name
+ 
+ 
+ 
+ 1、git branch --merged   获取合并过的分支。   
+ 2、检测是否包含目标分支
+ 
+ 
+找不到 hook 还是没能把 分支传进来。。。。。。
 
 
 chmod u+x pre-push
